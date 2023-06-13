@@ -5,7 +5,7 @@
   "description": "tener un navegador como cast, poder abrir direcciones o interactuar con ciertas plataformas para poder ser controlado desde otro equipo, la idea principal es tener un api en la cual puedas usar el navegador como un screen mirror o como un host cast para poder colocar contenido todo esto des un api",
   "main": "Main.js",
   "scripts": {
-    "start": "nodemon Main.js"
+    "start": "nodemon Api/servidor.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jakefantasma/host-browser#readme",
   "dependencies": {
+    "express": "^4.18.2",
     "puppeteer": "^20.7.1"
   }
 }

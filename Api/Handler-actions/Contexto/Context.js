@@ -19,6 +19,7 @@ async function InitBrowser() {
     args: [
       "--window-position=2850,500",
       `--window-size=${screenSize.windows.w},${screenSize.windows.h}`,
+      "--start-fullscreen",
       "--no-default-browser-check",
     ],
     ignoreDefaultArgs: [
