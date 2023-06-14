@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import path from "path";
 
 const screenSize = {
   windows: { w: 1920, h: 1080 },
@@ -16,6 +17,7 @@ async function InitBrowser() {
   contexto.br = await puppeteer.launch({
     headless: false,
     executablePath: "brave/brave.exe",
+    userDataDir: "./session",
     args: [
       "--window-position=2850,500",
       `--window-size=${screenSize.windows.w},${screenSize.windows.h}`,
