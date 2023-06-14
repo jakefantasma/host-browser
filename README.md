@@ -4,10 +4,10 @@ tener un navegador como cast, poder abrir direcciones o interactuar con ciertas 
 
 
 ## navegador
-[x] full screen
-[x] browser context
-[x] keep sessions 
+- [x] full screen
+- [x] browser context
+- [x] keep sessions 
 
 ## youtube 
-[x] controles sobre el video en curoso
-[x] controles de navegacion
+- [x] controles sobre el video en curoso
+- [x] controles de navegacion
