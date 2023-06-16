@@ -1,40 +1,40 @@
+//fix to import dir
+import { fileURLToPath } from "url";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import express from "express";
-import {
-  OpenVideoYoutube,
-  fullscreen,
-  play,
-  next,
-  cinema,
-} from "./Handler-actions/Handler-browser.js";
+import ApiYoutube from "./Handler-actions/rutas/youtube/Api_youtube.js";
+//console.log(ApiYoutube);
 const app = express();
-// Ruta principal
-app.get("/v1", async (req, res) => {
-  //res.sendFile(__dirname + "/index.html");
-  await OpenVideoYoutube("https://www.youtube.com/watch?v=Px3t9vNytqA");
+//configuracion de encode para jsons y elementos del body por post
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+//configuracion del acceso al api
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Acpet"
+  );
+  next();
+});
+app.use("/youtube", ApiYoutube);
+// Iniciar el servidor
+app.get("/test", async (req, res) => {
   res.json({ test: "asdasd" });
 });
-app.get("/v2", async (req, res) => {
-  //res.sendFile(__dirname + "/index.html");
-  await OpenVideoYoutube("https://www.youtube.com/watch?v=E5r84K95YkA");
-  res.json({ test: "asdasd" });
+app.post("/status", async (req, res) => {
+  res.json({ status: true });
 });
-app.get("/full", async (req, res) => {
-  await fullscreen();
-  res.json({ test: "asdasd" });
-});
-app.get("/play", async (req, res) => {
-  await play();
-  res.json({ test: "asdasd" });
-});
-app.get("/next", async (req, res) => {
-  await next();
-  res.json({ test: "asdasd" });
-});
-app.get("/cinema", async (req, res) => {
-  await cinema();
-  res.json({ test: "asdasd" });
+app.get("/controller", async (req, res) => {
+  let controller = path.join(__dirname, "../", "TesterController.html");
+  console.log(controller);
+  res.sendFile(controller);
+  //TesterController.html/
+  //res.json({});
 });
 // Iniciar el servidor
-app.listen(3000, () => {
-  console.log("Servidor escuchando en el puerto 3000");
+app.listen(420, () => {
+  console.log("Servidor escuchando en el puerto");
 });
