@@ -19,7 +19,8 @@
     var video2 = "https://www.youtube.com/watch?v=hWWh-gPtlpg";
     async function fetchData(subRoute, dt = {}) {
       try {
-        const response = await fetch("http://localhost:420/" + subRoute, {
+        const server = window.location.origin + "/";
+        const response = await fetch(server + subRoute, {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin
           cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
