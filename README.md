@@ -11,3 +11,7 @@ tener un navegador como cast, poder abrir direcciones o interactuar con ciertas 
 ## youtube 
 - [x] controles sobre el video en curoso
 - [x] controles de navegacion
+
+
+
+> TesterController deprecated

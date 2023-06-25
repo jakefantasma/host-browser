@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <title>Controller</title>
+  <style>
+    body {
+      background-color: rgb(100, 100, 100);
+      width: 700px;
+    }
+
+    .bntList {
+      display: flex;
+      width: 270px;
+      flex-direction: column;
+    }
+  </style>
+  <script>
+    var x = 20;
+    //var video = "https://www.youtube.com/watch?v=DWaB4PXCwFU";
+    var video2 = "https://www.youtube.com/watch?v=hWWh-gPtlpg";
+    async function fetchData(subRoute, dt = {}) {
+      try {
+        const server = window.location.origin + "/";
+        const response = await fetch(server + subRoute, {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: JSON.stringify(dt), // body data type must match "Content-Type" header
+        });
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    async function handlerCargar() {
+      //validamos
+      let valor = document.getElementById("videurl").value;
+      if (valor != undefined || valor != null) {
+        let respuesta = fetchData("youtube\\v1", {
+          url: valor,
+        });
+      }
+    }
+    async function estado() {
+      let respuesta = await fetchData("status");
+      //alert("respuesta");
+    }
+    async function Play() {
+      let respuesta = await fetchData("youtube\\play");
+    }
+    async function Cinema() {
+      let respuesta = await fetchData("youtube\\cinema");
+    }
+    async function FullScreen() {
+      let respuesta = await fetchData("youtube\\full");
+    }
+  </script>
+  <body>
+    <div id="Panel">
+      <div>
+        <input id="videurl" value="" placeholder="url" />
+        <button onclick="handlerCargar()">cargar video</button>
+      </div>
+      <div id="" class="bntList">
+        <button onclick="estado()">status</button>
+        <button onclick="Play()">Play</button>
+        <button onclick="Play()">Stop</button>
+        <button onclick="FullScreen()">FullScreen</button>
+        <button onclick="Cinema()">Cinema</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    //loader video hancler
+  </script>
+</html>

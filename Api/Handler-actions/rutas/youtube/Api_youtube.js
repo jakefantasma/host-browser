@@ -1,28 +1,22 @@
-import express from "express";
 import { youtube } from "../../Handler-browser.js";
-const ruta = express.Router();
-// Ruta principal
-let tipo = "post"; //defino tipo de ruta
-ruta[tipo]("/v1", async (req, res) => {
-  console.log(req.body.url);
-  //res.sendFile(__dirname + "/index.html");
-  await youtube.OpenVideoYoutube(req.body.url);
-  res.json({ test: "asdasd" });
-});
-ruta[tipo]("/full", async (req, res) => {
-  await youtube.fullscreen();
-  res.json({ test: "asdasd" });
-});
-ruta[tipo]("/play", async (req, res) => {
-  await youtube.play();
-  res.json({ test: "asdasd" });
-});
-ruta[tipo]("/next", async (req, res) => {
-  await youtube.next();
-  res.json({ test: "asdasd" });
-});
-ruta[tipo]("/cinema", async (req, res) => {
-  await youtube.cinema();
-  res.json({ test: "asdasd" });
-});
-export default ruta;
+function ActionYoutube(socket) {
+  socket.on("v1", async (req, res) => {
+    let video = req.video;
+    console.log(video);
+    await youtube.OpenVideoYoutube(video);
+    //res.json({ test: "asdasd" });
+  });
+  socket.on("full", async (req, res) => {
+    await youtube.fullscreen();
+  });
+  socket.on("play", async (req, res) => {
+    await youtube.play();
+  });
+  socket.on("next", async (req, res) => {
+    await youtube.next();
+  });
+  socket.on("cinema", async (req, res) => {
+    await youtube.cinema();
+  });
+}
+export default ActionYoutube;
