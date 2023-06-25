@@ -2,7 +2,6 @@ import { youtube } from "../../Handler-browser.js";
 function ActionYoutube(socket) {
   socket.on("v1", async (req, res) => {
     let video = req.video;
-    console.log(video);
     await youtube.OpenVideoYoutube(video);
     //res.json({ test: "asdasd" });
   });

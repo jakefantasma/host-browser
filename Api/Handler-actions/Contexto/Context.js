@@ -1,18 +1,17 @@
 import puppeteer from "puppeteer";
-import path from "path";
+import { Server as SocketIOServer } from "socket.io";
 
+import path from "path";
 const screenSize = {
   windows: { w: 1920, h: 1080 },
   viewport: { w: 1920, h: 1080 },
 };
-
 //todo es necesario un meotdo para guaradar las credenciales al cerrar
 //todo es necesario un metodo para cargar la configuracion del sitio
 const contexto = {
   br: null,
   currentPage: null,
 };
-
 async function InitBrowser() {
   contexto.br = await puppeteer.launch({
     headless: false,
@@ -42,6 +41,18 @@ async function InitBrowser() {
 })();
 export function getBrowser() {
   return contexto.br;
+}
+export function ScreenService(socket) {
+  socket.on("startServiceScreen", async (data, res) => {
+    let page = await getCurrentPage();
+    const screenshotOptions = {
+      type: "png", // También puede ser 'jpeg' si deseas una imagen en formato JPEG
+      encoding: "base64", // Codificamos la imagen en base64 para enviarla a la API
+    };
+    const screenshotData = await page.screenshot(screenshotOptions);
+    const base64Image = screenshotData.toString("base64");
+    socket.emit("imagen", base64Image);
+  });
 }
 export function getCurrentPage() {
   return contexto.currentPage;

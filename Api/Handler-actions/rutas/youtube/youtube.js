@@ -4,7 +4,6 @@ await sleep(1000 * 5); //fix para poder cargar el navegador <-
 //identificador del video insertado
 export async function OpenVideoYoutube(url) {
   let contexto = getContext();
-  console.log(contexto);
   let page = contexto.currentPage;
   await page.goto(url, {
     waitUntil: "networkidle0",
